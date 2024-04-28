@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
      EditText edit;
+     private static final YourActivity YourAct = new YourActivity();
      @SuppressLint("StaticFieldLeak")
      static Context Context;
      @SuppressLint("StaticFieldLeak")
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
                             if (Character.getType(currentChar) != Character.SURROGATE && Character.getType(currentChar) != Character.OTHER_SYMBOL) {
                                 filteredStringBuilder.append(currentChar);
                             }else{
-                                Toast.makeText(Context.getApplicationContext(), "Emojis Insertion does not Allowed here", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(Context.getApplicationContext(), "Emojis Insertion does not Allowed here", Toast.LENGTH_SHORT).show();
+                                YourAct.showToast(Context.getApplicationContext(),"Hello");
                                 return "";
                             }
                         }
@@ -49,5 +51,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        YourAct.dismissToast();
     }
 }
